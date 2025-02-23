@@ -103,7 +103,7 @@ matrix(25:49, byrow = TRUE, nrow=5)
 
 (@) Can you create a matrix that has 3 rows with only even numbers from 2 to 18? 
 ```{r}
-
+matrix(2:18, byrow = TRUE, nrow=3)
 ```
 
 ##### Subsetting Matricies 
