@@ -172,7 +172,7 @@ gayguides[2,555:2,560]
 charlestonManumissions[1:10, ]
 ```
 
-> In this dataset (it's loading as a csv. not too sure why) but I chose to subset the first ten rows of data, which showed 4 different categories. The result shows the first 10 individuals, their name, race, ownner, and their motive which I think is a critical category to have. 
+> In this dataset (it's loading as a csv. not too sure why) but I chose to subset the first ten rows of data, which showed 4 different categories. The result shows the first 10 individuals, their name, race, owner, and their motive which I think is a critical category to have. 
 
 Another useful operator to know is `$` which we used a little bit in the previous worksheet. `$` is shorthand for accessing a variable in a dataframe. 
  
