@@ -41,7 +41,7 @@ x[c(3,3)]
 ```
 (@) Create your own vector and return three values using the subsetting method above. 
 ```{r}
-
+y <- c(3,6,9)
 ```
 
 
@@ -52,7 +52,7 @@ x[-c(3, 1)]
 
 (@) What happened here? Describe this in your own words. 
 
->
+>The third number in the list "2" is to be excluded, as well as the first number of the sequence which is "15.4". So the final result "[1] 25.00 8.35 5.00 383.00 10.20" omit those numbers because of this negative integer. 
 
 You can use either positive or negative integers to subset a vector but you **cannot mix the two**.
 
