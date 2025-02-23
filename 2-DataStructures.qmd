@@ -104,6 +104,7 @@ matrix(25:49, byrow = TRUE, nrow=5)
 (@) Can you create a matrix that has 3 rows with only even numbers from 2 to 18? 
 ```{r}
 matrix(2:18, byrow = TRUE, nrow=3)
+
 ```
 
 ##### Subsetting Matricies 
@@ -153,7 +154,7 @@ gayguides[1:3,]
 
 (@) Why is this different? What do we get compared to the previous example? 
 
->
+> The first subset, shows only rows 2 and 3 in the output. Versus [1:3,] is only showing rows 1 through 3 with no specifying the only rows that want to be shown, not the entire dataset. 
 
 (@) Can you find just the city and state for the first 5 entries? 
 ```{r}
