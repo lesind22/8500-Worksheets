@@ -164,15 +164,22 @@ gayguides[1:5,]
 (@) How about the street address and type for rows 2,555 to 2,560?
 
 ```{r}
-gayguides[2,555:2,560]
+gayguides[2555:2560, 5:6]
 ```
 
 (@) Load another dataset from `DigitalMethodsData`. Subset it to find some element of the data. Write the code below and then explain what element of the data you wanted to subset and why:
 ```{r}
+library(DigitalMethodsData)
+data(charlestonManumissions)
+for (name in 1:length(charlestonManumissions$Name)) {
+  if (charlestonManumissions$Name[na] =< 30) {
+    print(charlestonManumissions$Name[na])
+  }
+}
 charlestonManumissions[1:10, ]
 ```
 
-> In this dataset (it's loading as a csv. not too sure why) but I chose to subset the first ten rows of data, which showed 4 different categories. The result shows the first 10 individuals, their name, race, owner, and their motive which I think is a critical category to have. 
+> In this dataset (it's loading as a csv. not too sure why) but I chose to subset the first ten rows of data, which showed 4 different categories. The result shows the first 10 individuals, their name, race, owner, and their motive which I think is a critical category to have. It also showed the date, volume, and page that the information is located on, but specifically for the first 10 rows. 
 
 Another useful operator to know is `$` which we used a little bit in the previous worksheet. `$` is shorthand for accessing a variable in a dataframe. 
  
@@ -303,7 +310,7 @@ What does this loop do? `1:3` is shorthand for 1, 2, 3. Run it in your terminal 
 
 We could do this with character vectors too. 
 ```{r}
-presidents <- c("George Washington", "John Adams", "Thomas Jefferson")
+presidentslength() <- c("George Washington", "John Adams", "Thomas Jefferson")
 for (p in 1:length(presidents)) {
   print(presidents[p])
 }
