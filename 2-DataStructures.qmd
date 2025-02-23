@@ -189,7 +189,7 @@ gayguides$city[100:110]
 
 (@) What does this code do? 
 
->
+>This line of code is specific for getting to the cities in the gayguides dataset. It also displays the cities between lines 100-110, not the entire dataset. 
 
 
 We can also use `$` to create a new column in `gayguides`. 
@@ -252,12 +252,24 @@ if (x > 90) {
 
 (@) You are teaching History 100 for Clemson. Write an `if` statement that calculates whether the enrollment cap of 30 on your class has been met. 
 ```{r}
-
+x <- 100
+if (x <= 30) {
+"enrollment cap reached"
+}
+else if (x < 100) 
+"enrollment not reached"
 ```
 
 (@) Create a list of presidents and store it in a variable. Use an `if` statement to check if the number of presidents in the list is more than 5. If its not, indicate that too. 
 ```{r}
-
+presidents <- c(Washington, Regan, Roosevelt, Bush, Kennedy)
+if (presidents < 5) {
+print ("it is FALSE.")
+} else if (presidents >= 5) {
+  print ("it is FALSE.") 
+} else {
+ print("it is five.")
+}
 ```
 
 (@) You can also use an if statement to check a variable in a dataframe. How might you use an if statement to check if the GayGuides dataset contains any year after 1990? (Hint: first try to figure out how to determine the latest year in the dataframe and then build an if statement that checks that and prints something out if its true or false. You should think about what kind of value in contained in the Year column, how to access it, and how to check for the latest value.) 
