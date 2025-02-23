@@ -82,7 +82,7 @@ If your vector is named, you can also use character vectors to return elements w
 y[c("d")]
 ```
 (@) What happened here? Explain this in your own words. 
-
+> The vector is separating names from letters, and it is also asking to show the first number in the set A-D. The remaining numbers do not have a letter to match, except the return values of what was given in the original vector set (383.00 and 10.20)
 #### Matrices
 
 We can subset higher dimensional structures, like matrices, too. First lets define a matrix. In R, **a matrix** is a collection of elements of the same data type (numeric, character, or logical) arranged into a fixed number of rows and columns. Since you are only working with rows and columns, a matrix is called two dimensional. To create a matrix you can use the `matrix()` function.
@@ -98,7 +98,7 @@ In the `matrix()` function:
 
 (@) You try now, create a matrix that had five rows with numbers that range from 25 to 49. 
 ```{r}
-
+matrix(1:25, byrow = TRUE, nrow=5)
 ```
 
 (@) Can you create a matrix that has 3 rows with only even numbers from 2 to 18? 
