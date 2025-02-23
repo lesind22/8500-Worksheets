@@ -69,7 +69,7 @@ x[x > 7]
 
 (@) What is going on in each of the lines above? Describe it in your own words. 
 
->
+> Qhat is happening is
 
 Nothing returns the original vector. This isn't that useful here but can come in handy when you have more complex structures like matrices and arrays. 
 ```{r}
