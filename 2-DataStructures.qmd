@@ -169,10 +169,10 @@ gayguides[2,555:2,560]
 
 (@) Load another dataset from `DigitalMethodsData`. Subset it to find some element of the data. Write the code below and then explain what element of the data you wanted to subset and why:
 ```{r}
-
+charlestonManumissions[1:10, ]
 ```
 
-> 
+> In this dataset (it's loading as a csv. not too sure why) but I chose to subset the first ten rows of data, which showed 4 different categories. The result shows the first 10 individuals, their name, race, ownner, and their motive which I think is a critical category to have. 
 
 Another useful operator to know is `$` which we used a little bit in the previous worksheet. `$` is shorthand for accessing a variable in a dataframe. 
  
