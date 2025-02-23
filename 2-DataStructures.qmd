@@ -282,11 +282,22 @@ print ("it is FALSE.")
 (@) You can also use an if statement to check a variable in a dataframe. How might you use an if statement to check if the GayGuides dataset contains any year after 1990? (Hint: first try to figure out how to determine the latest year in the dataframe and then build an if statement that checks that and prints something out if its true or false. You should think about what kind of value in contained in the Year column, how to access it, and how to check for the latest value.) 
 
 ```{r}
+library(DigitalMethodsData)
+data(gayguides)
+max(gayguides$Year)
+if (gayguides$Year > 1990){
+  print("FALSE")
+}
+for (ex in 1:length(gayguides$Year)){
+  if (gayguides$Year[ex] > 1990){
+    print("TRUE")
+  }
+}
 ```
 
 (@) Reflect on the question above. How did you figure this out? What was the process you went through to build this chunk of code?
 
-> 
+> I had to extract the dataset from the library. From there I began to build the "if" statement. The max year is less than 1990 because we don't want to go beyond that year. The $ is accessing other data, within the dataset. Also asking it to print "FALSE" if they are any years over 1990, and displaying in the statement whether or not if the condition is "TRUE", then the output will print "TRUE". 
 
 #### Loops
 
