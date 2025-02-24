@@ -522,7 +522,7 @@ library(DigitalMethodsData)
 data(BostonWomenVoters)
 names$BostonWomenVoters$occupation
 
-occupation$(BostenWomenVoters)
+occupation$(BostonWomenVoters)
 
 ```
 
