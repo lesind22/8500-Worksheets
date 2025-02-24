@@ -329,12 +329,16 @@ for (p in 1:length(presidents)) {
 
 (@) Why does this work? What does `length()` do and why do we use it on `presidents`?
 
-> 
+> It works because the listed presidents, while length () is returning the number of presidents. We use it on  'presidents' because it will return the total number of presidents that are in the string. 
 
 Create a character vector that contains the title of each of your classes this semester. Can you write a `for` loop that prints out "I am enrolled in" and the name of each of your classes? ("I am enrolled in History 8150", "I am enrolled in History 8000".....etc). Hint: you'll need a function to combine the output and some text of your choosing inside the function. 
 
 ```{r}
-
+my_classes <- c("HIST 8500", "HIST 8510", "HIST 6930")
+for i= 1:("I am enrolled in") {
+  else ("I am not enrolled in")
+  print ("FALSE")
+}
 ```
 
 Sometimes we want our loop to terminate itself early. There are two statements that help us do that: 
@@ -365,16 +369,25 @@ for (i in 1:10) {
 ```
 
 (@) What happened here? Why did the loop only print 3 and 4? 
-
+> The reason why the loop only printed 3 and 4 is because ">=" 5 is greater than 3 and 4. With next its skipping the other columns and only printing 3 and 4.
 
 (@) In the state population data, can you write a loop that pulls only states with populations between 200,000 and 250,000 in 1800? You could accomplish this a few different ways. Try to use next and break statements. 
 ```{r}
-
+if(statepopulations$)
+  if(statepopulations$1800 [i] > 25000){
+    next
+  }
+  if (statepopulations$1800 [i] < 20000){
+    next
+  }
+  print(statepopulations$X1800 [i])
 ```
 
 (@) What if we wanted to loop through the gay guides data? Can you write a loop that iterates through the cities in the Gay Guides data and returns the title of any location in Greenville? 
 ```{r}
-
+gayguides <- generate_cities(Greenville)
+while (gayguidesdata$location$Greenville)
+  print(greenville)
 ```
 
 `while` is another useful tool for writing loops. While will run a loop _while_ a condition is true. Once that condition is not true, it exits. For example: 
@@ -433,12 +446,20 @@ There are several components to a function.
 
 (@) Write a function that takes a string of text and counts the number of characters. The function should return "There are xx characters in that string." 
 ```{r}
+count_characters <- function(text) {
+  character_count <- nchar(text)
+  paste("There are", character_count, "characters in that string")
+} 
 
+
+my_string <- "Hello, world!"
+result <- count_characters(my_string)
+print(result)  # Output: "There are 13 characters in that string" 
 ```
 
 (@) Reflect on the process of building the above function. How did you go about figuring this out? 
 
->
+>In order for it to output how many characters are in the string, I had to call it. "Count_characters" is taking a single argument, which would become a string once the characters are counted in. The paste function is also important because it is combining the string "there are" which calculates into "character count", into a single output string, returned by the function " [1] There are 13 characters in that string".
 
 The body of a functions can use any of the techniques we've learned in this worksheet like loops and if statements. For example: 
 ```{r}
