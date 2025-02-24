@@ -487,7 +487,7 @@ grade(75)
 GeorgeWashington <- grade(60)
 ```
 
->
+>Because it isn't calling on anything in the ordered list to produce the output of (60).
 
 
 Here's a more complex example: 
@@ -511,10 +511,18 @@ gg.locations("San Diego", 1980)
 
 ```{r}
 
+gayguides <- get_state_data("South Carolina",1989) 
+print(gay_guides_data1989) 
+
 ```
 
 (@) Use the Boston Women Voters dataset (BostonWomenVoters). Write a function that accepts the name of an occupation. Your function should return new dataframe that includes the records for every voter listed with that occupation.  
 ```{r}
+library(DigitalMethodsData)
+data(BostonWomenVoters)
+names$BostonWomenVoters$occupation
+
+occupation$(BostenWomenVoters)
 
 ```
 
