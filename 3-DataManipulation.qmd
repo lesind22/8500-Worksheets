@@ -82,20 +82,24 @@ gayguides %>%
 (@) The above code grabs every location where the city is Greenville. However, there is more than one city named Greenville. Can you filter to retrieve Greenville, SC? 
 
 ```{r}
-
+#| eval: true
+gayguides %>% 
+  filter(city != "Greenville, SC")
 ```
 
 (@) How about every location between 1975 and 1980? 
 
 ```{r}
-
+gayguides %>% filter(Year == 1975 | Year == 1980)
 ```
 
 
 (@) Every entry in Greenville, SC between 1975 and 1980? 
 
 ```{r}
-
+gayguides %>% 
+  filter(location == "Greenville, SC") 
+    gayguides %>% filter(Year == 1975 | Year ==  1980)
 ```
 
 (@) Can you find all locations in 1975 except for New York and San Francisco? 
