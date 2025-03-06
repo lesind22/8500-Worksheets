@@ -47,7 +47,7 @@ locations <- gayguides %>%
 
 (@) What did you do to save the data to a new data frame? Why? 
 
-> In order to save it to another data frame, I had to create a new data frme using the existing data from gay guides. Then I had to use the selet() function to only extract city and state from the data. 
+> In order to save it to another data frame, I had to create a new data frme using the existing data from gay guides. We use library(dplyr) in order to manipulate the already created dataset. Then I had to use the select() function to only extract city and state from the data. 
 
 (@) Can you use `select()` to grab all the columns of `gayguides` EXCEPT for the city and state? Hint: You might want to read the documentation for this function. 
 ```{r}
