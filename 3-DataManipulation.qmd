@@ -183,7 +183,10 @@ What happened here? In this example, we asked group_by to create groups based on
 
 (@) You try, use group_by and summarize to find the total number of locations in each state, each year.
 ```{r}
-
+gayguides %>%
+  select(state, Year) %>%
+  group_by(state, Year) %>%
+  summarize(count = n())
 ```
 
 (@) Summarize can do more than just count rows. Can you use `summarize()` to find the average age for each occupation in the Boston Women Voters data?
