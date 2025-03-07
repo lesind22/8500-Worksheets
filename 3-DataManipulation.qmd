@@ -136,6 +136,7 @@ BostonWomenVoters %>%
 (@) Can you create a new column that combines the city and state columns in `gayguides` into a new column called location? It should list the city, state. (i.e. San Diego, CA)
 
 ```{r}
+gayguides$city_state <-c('location')
 
 
 ```
