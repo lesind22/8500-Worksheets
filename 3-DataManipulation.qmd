@@ -285,12 +285,14 @@ sc.parks %>%
 
 (@) Widen the `sc.parks` dataset so that the column names are drawn from the type of recreation worker.
 ```{r}
-
+sc.parks %>%
+  pivot_wider(names_from = type_of_worker, values_from = count)
 ```
 
 (@) Turn `rec.spaces` into a wide dataframe. 
 ```{r}
-
+rec.spaces %>%
+  pivot_wider(names_from = type, values_from = type) 
 ```
 
 
@@ -308,24 +310,40 @@ The implicit question was, "How many locations appear in each year?". The `judge
 ```{r}
 
 ```
+I didn't see the 'judges' dataset, so I'm using the charlestonManumissions dataset. The question I am asking is how popular is the motive 'moral' is? In the year of 1777, since that year appears frequently. 
 
 (@) Now write some code to address that question. Comment the code with notes that explain your thinking as you go. Use functions like select(), filter(), etc to pair down your dataset and reshape it to address your question. 
 ```{r}
-
+charlestonManumissions %>%
+  select('Motive') %>%
+  group_by('moral' == 1777) %>%
+  summarize(count = n())
 ```
+In order to figure out this question I had to access the dataset first. Then I had to select what I wanted to figure out which is 'Motive'. From there I had to figure out what motive I was looking for which was 'moral' with the year of 1777. From there I had to summarize the count.
 
 (@) Now ask a question of the `gayguides` data (or another dataset of your choice). What is the question you are asking? 
 ```{r}
 
 ```
+The next question I am asking is of the almshouse admissions. What year was the most people were admitted? The answer I got was the year 1801.
 
 (@) Now write some code to address that question. Comment the code with notes that explain your thinking as you go. Use functions like select(), filter(), etc to pair down your dataset and reshape it to address your question. 
 ```{r}
-
+almshouse_admissions %>%
+  select(Year.Admitted) %>%
+  group_by(Year.Admitted) %>%
+  summarize(count = n())
+  
 ```
+At first the code wouldn't run because I didn't have select(), instead I was trying to filter it at first, which was wrong. I wanted to group the output with the year admitted only. The summarize was the count of how many indiciduals were admitted during a given year.
 
 (@) Write a function that filters the gay guides dataset. It should accept 2 arguments: year and state. When passed to the function the function should return only the title, type, state and year for each entry. 
 ```{r}
-
+gayguides %>%
+  select(Year, state)
+  filter(Year, state) %>%
+  group_by(type, state) %>%
+  
+  
 ```
 
