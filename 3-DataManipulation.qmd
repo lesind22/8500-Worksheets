@@ -344,6 +344,7 @@ gayguides %>%
   filter(Year, state) %>%
   group_by(type, state) %>%
   
+#edit at end so I can comment -AR
   
 ```
 
