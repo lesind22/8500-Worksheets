@@ -1,0 +1,10 @@
+Web Script 
+Mar. 19th 2025
+
+
+library("internetarchive")
+ia_keyword_search("sim_crisis_1930-07_37_7")
+
+library("internetarchive")
+    ia_search('pub_crisis')
+
