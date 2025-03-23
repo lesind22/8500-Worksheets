@@ -11,3 +11,4 @@ library("internetarchive")
     ia_search('pub_crisis')
 
 library("internetarchive")
+    ia_get_item('pub_crisis')
