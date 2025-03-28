@@ -17,18 +17,17 @@ library(jsonlite)
     ia_metadata(TheCrisisPublishingCompany)
     ia_files(TheCrisisPublishingCompany)
 
+        ia_keyword_search("isaac hecker", num_results = 12) %>% 
+        ia_get_items() %>% 
+        ia_metadata() %>% 
+        filter(field == "title") %>% 
+        select(value)
     
 library("internetarchive")
-    TheCrisisPublishingCompany <- ia_get_items("sim_crisis_1930-12_37_12")
-    result <- ia_get_items("sim_crisis_1930-12_37_12")
+        ia_get_items("sim_crisis_1930-12_37_12")
         ia_metadata("sim_crisis_1930-12_37_12")
         ia_files("sim_crisis_1930-12_37_12")
 
-ia_keyword_search("isaac hecker", num_results = 3) %>% 
-  ia_get_items() %>% 
-  ia_metadata() %>% 
-  filter(field == "title") %>% 
-  select(value)
 
 #Fix area below before turning in Web Script!!!!!!
     result <- ia_get_items("sim_crisis_1930-05_37_5")
