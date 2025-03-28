@@ -4,15 +4,55 @@ Mar. 19th 2025
 
 
 
-library("internetarchive")
-
+library(internetarchive)
+library(tidyverse)
     ats_query <- c("publisher" = "The Crisis Publishing Company", "year" = "1930")
     ia_search(ats_query, num_results = 12)
 
     ia_search(c("publisher" = "the crisis publishing company", date = "1930"))
-    
-# 14 AND REMAINDER OF SCRIPT WORK THROUGH ERRORS
+
+# ATS Query results succesful, now time to retrieve the metadata to create a data frame. 
+
  library("internetarchive")
+ library(tidyverse)
+    pub_crisis <- ia_get_items("sim_crisis_1930-07_37_7")
+    ia_metadata(pub_crisis)
+    ia_files(pub_crisis)
+    
+# From here we see that a Tibble is produced showing the id, file, as well as it's type. Next I will be creating a 
+# a data frame to show The Crisis Magazine Publications from 1930. 
+
+    ia_keyword_search("The Crisis Publishing Company", num_results = 12) %>% 
+    ia_get_items() %>% 
+    ia_metadata() %>% 
+    filter(field == "json") %>% 
+    select(value)
+
+# The goal is to download the files from Internet Archive and then compile it all into a data frame. 
+
+
+
+
+
+
+    filter(field == "1930") %>% 
+    print(data.frame("sim_crisis_1930-07_37_7")
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     pubcrisis <- ia_get_items("TheCrisisPublishingCompany")
     ia_metadata()
     ia_files()
