@@ -132,19 +132,31 @@ identifiers <- c(
     metadata_df <- bind_rows(metadata_list)
     print(metadata_df)
 
-# In this last section of the script I will be downloading pdf files of the 12 Crisis Magazine that were retrieved. 
+# In this last section of the script I will be downloading "PDF" files of the 12 Crisis Magazine that were retrieved. 
+# After looking through the IA website a little bit more, I found I believe the code needed to retrieve the "txt" file.
+# I decided to download each PDF through the terminal, and below is how I worked through it. Using "curl", I downloaded each file
+# through the zsh terminal. 
+# They show up in my workspace, trying to figire out how to open pdfs that show 
+#The Crisis Magazine in another window
 
-    
+#This is the code used in the zsh terminal to open pdfs, below is the first I tested out to see if it would work.
+curl -o sim_crisis_1930-01_37_1.pdf https://ia801803.us.archive.org/31/items/sim_crisis_1930-01_37_1/sim_crisis_1930-01_37_1.pdf
 
-        
+#Since it worked, I manually entered each publication into the bash terminal to open, and it did.
 
+#This is the fuction to open pdf in the bash terminal
+    open "sim_crisis_1930-10_37_10.pdf"
 
-
-
-
-
-
-
+curl -o sim_crisis_1930-02_37_2.pdf https://dn720508.ca.archive.org/0/items/sim_crisis_1930-02_37_2/sim_crisis_1930-02_37_2.pdf
+curl -o sim_crisis_1930-03_37_3.pdf https://dn790005.ca.archive.org/0/items/sim_crisis_1930-03_37_3/sim_crisis_1930-03_37_3.pdf
+curl -o sim_crisis_1930-04_37_4.pdf https://ia803409.us.archive.org/11/items/sim_crisis_1930-04_37_4/sim_crisis_1930-04_37_4.pdf
+curl -o sim_crisis_1930-05_37_5.pdf https://ia803404.us.archive.org/6/items/sim_crisis_1930-05_37_5/sim_crisis_1930-05_37_5.pdf
+curl -o sim_crisis_1930-06_37_6.pdf https://ia803404.us.archive.org/24/items/sim_crisis_1930-06_37_6/sim_crisis_1930-06_37_6.pdf
+curl -o sim_crisis_1930-07_37_7.pdf https://dn790004.ca.archive.org/0/items/sim_crisis_1930-07_37_7/sim_crisis_1930-07_37_7.pdf
+curl -o sim_crisis_1930-09_37_9.pdf https://dn720605.ca.archive.org/0/items/sim_crisis_1930-09_37_9/sim_crisis_1930-09_37_9.pdf
+curl -o sim_crisis_1930-10_37_10.pdf https://ia803407.us.archive.org/3/items/sim_crisis_1930-10_37_10/sim_crisis_1930-10_37_10.pdf
+curl -o sim_crisis_1930-11_37_11.pdf https://ia803407.us.archive.org/14/items/sim_crisis_1930-11_37_11/sim_crisis_1930-11_37_11.pdf
+curl -o sim_crisis_1930-12_37_12.pdf https://dn790007.ca.archive.org/0/items/sim_crisis_1930-12_37_12/sim_crisis_1930-12_37_12.pdf
 
 
 
