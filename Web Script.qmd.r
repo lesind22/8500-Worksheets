@@ -132,11 +132,11 @@ identifiers <- c(
     metadata_df <- bind_rows(metadata_list)
     print(metadata_df)
 
-# In this last section of the script I will be downloading "PDF" files of the 12 Crisis Magazine that were retrieved. 
-# After looking through the IA website a little bit more, I found I believe the code needed to retrieve the "txt" file.
+# In this last section of the script I will be downloading the "PDF" files of the 12 Crisis Magazine that were retrieved. 
+# After looking through the IA website a little bit more, I found I believe the code needed to retrieve the "pdf" file.
 # I decided to download each PDF through the terminal, and below is how I worked through it. Using "curl", I downloaded each file
 # through the zsh terminal. 
-# They show up in my workspace, trying to figire out how to open pdfs that show 
+# They show up in my workspace, trying to figure out how to open pdfs that show 
 #The Crisis Magazine in another window
 
 #This is the code used in the zsh terminal to open pdfs, below is the first I tested out to see if it would work.

@@ -7,8 +7,9 @@ Mar. 19th 2025
 library("internetarchive")
 ia_keyword_search("sim_crisis_1930-07_37_7")
 
-library("internetarchive")
-    ia_search('pub_crisis')
+
+    ats_query <- c("publisher" = "The Crisis Publishing Company", "year" = "1930")
+    ia_search(ats_query, num_results = 10)
 
 library("internetarchive")
-    ia_get_item('pub_crisis')
+   ia_search(c("publisher" = "the crisis publishing company", date = "1930"))

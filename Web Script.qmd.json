@@ -1,0 +1,28 @@
+Indira Lessington 
+Web Script 
+Mar. 19th 2025
+
+
+
+library("internetarchive")
+ia_keyword_search("sim_crisis_1930-07_37_7")
+
+    ats_query <- c("publisher" = "The Crisis Publishing Company", "year" = "1930")
+    ia_search(ats_query, num_results = 10)
+
+   ia_search(c("publisher" = "the crisis publishing company", date = "1930"))
+    
+ library("internetarchive")   
+    pub_crisis <- ia_get_items("sim_crisis_1930-07_37_7")
+    pub_crisis <- ia_get_items("sim_crisis_1930-11_37_11")
+    pub_crisis <- ia_get_items("sim_crisis_1930-02_37_2")
+
+    ia_metadata(pub_crisis)
+    ia_files(sim_crisis_1930-07_37_7)
+
+library("internetarchive")
+    ia_keyword_search("the crisis publishing company", num_results = 10, year = 1930) %>%
+    ia_get_items("sim_crisis_1930-07_37_7") (WORK ON THIS SECTION TOMORROW!!!!!)
+    ia_get_items("sim_crisis_1930-11_37_11")
+    ia_get_items("sim_crisis_1930-02_37_2")
+    ia_metadata()
