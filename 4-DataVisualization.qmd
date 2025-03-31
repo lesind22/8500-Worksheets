@@ -214,7 +214,7 @@ ggplot(occupation_data, aes(x = reorder(Occupation, -Number_of_Women), y = Numbe
   labs(title = "Occupation of Women Living in Massachusetts", # Here I created a title for the chart
        x = "Occupation", # The x axis I want to see the occupation of these women 
        y = "Number of Women") + # The y axis I want to see the number of women who reside in Massachusetts
-  theme_minimal() #Here, just like the rest of the plots created I wanted to stay within the minial theme. 
+  theme_classic() #Here, just like the rest of the plots created I wanted to stay within the classic theme. 
 
 
 ```
@@ -232,13 +232,27 @@ ggplot(gg.byyear, aes(x = Year, y = count)) +
 
 (@) Create a line chart that shows the number of religious institutions in the gay guides data over time.
 ```{r}
-
+data(gayguides)
+gg.byyear <- gayguides %>% group_by(religious_counts) %>% summarize(count = n())
+ggplot(gg.byyear, aes(x = Year, y = religious_counts)) +
+geom_line()
 ```
 
 (@) In the gayguides data, danger or risk is indicated in several different ways. Sometimes it through the use of an amenity categorization of (HOT) or (AYOR) which meant that these locations were frequented by police and should be used at your own risk. Other times, locations were listed as "inquire locally" in either the description or address field. There are many reasons a location would have requested to have been listed this way. Many times, it was due to harassment and the location deemed it too dangerous to publicly list its location. Can you create a subset of the gay guides data about risk and then use it to create a chart about the usage of these indicators over time? 
 ```{r}
+data(gayguides)
+gayguides %>% risk_data %>%
+filter(risk %>% c("HOT/AYOR", "Inquire Locally"))
+  HOT_counts <- AYOR_counts %>%
+  group_by(year, "inquire locally") %>%
+  summarize (count = n (), .groups = "drop") %>%
+  pivot_wider(names_from = risk, values_from count, values_fill = 0)
+ggplot(gayguides, aes(x = year)) +
+
+  theme_classic()
 
 ```
+Confusion above. 
 
 
 ### Faceting
@@ -253,18 +267,48 @@ ggplot(gg.byyear, aes(x = Year, y = count)) +
 
 (@) Using the state recreation data, can you create a chart that outlines the total expenditures in South Carolina by city?
 ```{r}
-
+gg.byyear <- sc.rec %>% filter(state == "SC") %>% group_by(state.expenditures), summarize(count = n()) 
+ggplot(gg.byyear, aes(x = city, y = total expenditures))
+  geom_line() + facet_wrap(~state)
 ```
 
 (@) Using the gayguides data can you select 5 types of locations and chart the number of each type between 1965 and 1980? 
 ```{r}
-
+data(gayguides)
+filter(gayguides) <- gayguides %>%
+  filter(year >= 1965 & year <= 1980)
+  filter(location) <- c(restaurant, hotel, crusing areas, bathhouse, bar) %>%
+ggplot(gayguides, aes(x = year, y = count)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~ type, ncol = 5) + 
+  labs(
+    title = "Number of Selected Location Types (1965-1980)",
+    x = "Year",
+    y = "Count"
+  ) +
+  theme_classic()
 ```
 
 (@) Using this recreation dataset from last week, can you find the average number of volunteer and paid workers over time? 
 ```{r}
 rec.workers <- read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/RecreationData-Wide.csv")
-
+group_by(year) %>%
+summarize(
+  avg_volunteers = mean(volunterrs, na.rm = TRUE
+  avg_paid_workers = mean(paid_workers, na.rm = TRUE))
+)
+ggplot(average_workers, aes(x = year)) +
+  geom_line(aes(y = avg_volunteers, color = "Volunteers")) +
+  geom_line(aes(y = avg_paid_workers, color = "Paid Workers")) +
+  geom_point(aes(y = avg_volunteers, color = "Volunteers")) +
+  geom_point(aes(y = avg_paid_workers, color = "Paid Workers")) +
+  labs(
+    title = "Average Number of Workers Over Time",
+    x = "Year",
+    y = "Average Number of Workers",
+  ) +
+  theme_classic()
 
 ```
 
@@ -273,25 +317,61 @@ In the slots below use the datasets for class (or a dataset of your choice) to c
 
 (@) Plot 1
 ```{r}
+data(gayguides) 
+Cruising_Areas <- gayguides %>%
+filter(city == "Chicago") %>%
+  group_by(Cruising_Areas) %>%
+  summarize(count = n())
+ggplot(gayguides, aes(x = Cruising_Areas, y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    title = "Cruising Locations in Chicago by Type",
+    x = "Location Type",
+    y = "city"
+  ) +
+  theme_classic()
 
 ```
 
 (@) Plot 1 explanation: 
->
+> Here I wanted to create a line graph from the Gay Guides dataset. In this code, the observation that I wanted to figure out is to show the types of areas within Chicago that are specifcally for cruising purposes. 
 
 (@) Plot 2
 ```{r}
+data(BostonWomenVoters) <- voter_data %>%
+  filter(state == "Massachusetts" & city == "Boston" & gender == "Female")
+  overall_avg_age <- mean(BostonWomenVoters$age, na.rm = TRUE)
+ ggplot(gayguides, aes(x = female, y = Age)) +
+  geom_line() +
+  labs(
+    title = "Average Age of Boston Women Voters Over Time",
+    x = "Year",
+    y = "Average Age"
+  ) +
+  theme_classic()
 
 ```
 
 (@) Plot 2 explanation: 
->
+> Here I wanted to create a line graph that shows the average age of Boston Women Voters in the state of Massachusetts.
 
 (@) Plot 3. For this one, try a different kind of plot. [Check out a useful gallery here.](https://github.com/regan008/DigitalMethodsData/blob/main/raw/RecreationData-Wide.csv)
 (For this week, avoid choosing a map. We'll talk more about maps and geographic data over the next two weeks.)
 ```{r}
+data(gayguides) 
+california_data <- gayguides %>%
+  filter(state == "California")
+ggplot(california_data, aes(x = amenityfeatures)) +
+  geom_bar(fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(
+    title = "Distribution of Amenity Features in California",
+    x = "Amenity Features",
+    y = "Count"
+  ) +
+  theme_classic()
 
-```
+``` 
 
 (@) Plot 3 explanation: 
->
+> Here I wanted to create a histogram that shows the type of amenityfeatures for the state of California using the Gay Guides dataset. I know that they are many amenityfeatures so I wanted to see how it looked specfically for California, specifically for the state's land mass, I wanted to look at how many amenity features were present. 
