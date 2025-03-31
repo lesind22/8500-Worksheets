@@ -197,10 +197,25 @@ ggplot(religious_counts, aes(x = reorder(state, -count), y = count)) +
 (@) Formulate a question based on a dataset of your choice. That question should be something that would be appropriately answered by a bar chart.
  What is the question you want to explore?
 
-<
+< I want to create a barplot based on the Boston Women Voters dataset. I want to create a barplot figuiring out the occupation of women in Massachusetts. What was the most common occupation among women in the Boston Women Voters dataset?
 
 (@) Now write the code to answer that question and use comments (`#`) to explain your thinking as you go.
 ```{r}
+library(DigitalMethodsData)
+data(BostonWomenVoters)
+
+occupation_data <- BostonWomenVoters %>% # In order to get the data spefically for occupation, I had to pass it through piping
+  filter(State.or.Province.of.Birth== "Massachusetts") %>% # I had to filter here because the column names have to match up with the question I am asking and in this sense, the state I want to look at is Massachusetts.
+  group_by(Occupation) %>% # Here I had to use the group_by function to make sure the occupations are in groupings
+  summarize(Number_of_Women = n()) # Here I had to summarize the number of women which is "n" because I do not know the amount of women within the dataset.
+
+ggplot(occupation_data, aes(x = reorder(Occupation, -Number_of_Women), y = Number_of_Women)) + #Here I reordered the data visualization, so that it would display what I am looking for which is occupation and the number of women.
+  geom_bar(stat = "identity") + # Here I used the geom_bar function to crate a bar chart needed. The stat() function is retreving the information needed about these women.
+  labs(title = "Occupation of Women Living in Massachusetts", # Here I created a title for the chart
+       x = "Occupation", # The x axis I want to see the occupation of these women 
+       y = "Number of Women") + # The y axis I want to see the number of women who reside in Massachusetts
+  theme_minimal() #Here, just like the rest of the plots created I wanted to stay within the minial theme. 
+
 
 ```
 
