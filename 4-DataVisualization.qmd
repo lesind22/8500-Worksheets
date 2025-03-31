@@ -128,17 +128,27 @@ ggplot(recreational.data, aes(x = population)) +
 
 (@) Use the Boston Women's voters dataset to create a histogram of the age of voters. 
 ```{r}
+library(DigitalMethodsData)
+data(BostonWomenVoters)
 
+ggplot(BostonWomenVoters, aes(x = Age)) +
+  geom_histogram()
 ```
 
 (@) By default, `geom_histogram()` is choosing the number of bins. Can you change the number of bins or the bin width? (Hint: How might you look up the options for this function?)
 ```{r}
+library(DigitalMethodsData)
+data(BostonWomenVoters)
+
+ggplot(BostonWomenVoters, aes(x = Age)) + 
+  geom_histogram(binwidth= 10)
+  scale_x_continuous(breaks= c(20, 40, 60, 80))
 
 ```
 
 (@) Explain, what does changing the number of bins do? 
 
-> 
+> Changing the number of bins ultimately widens the bars while also adding more dimensions to the overall histogram. When I insert a number larger than 10, the bars combine together they are less ridges. When the bindwidth is 10 or less, the bars in the histogram have more ridges.
 
 ### Barplots 
 
@@ -152,15 +162,40 @@ ggplot(sc.rec, aes(x = state, y = state.expenditures )) +
 
 (@) Using the `gayguides` data, create a bar chart that shows the number of locations in 1980 in South Carolina, Georgia, and North Carolina. 
 ```{r}
+library(DigitalMethodsData)
+data(gayguides)
+
+filter(gayguides)
+  filter(Year == 1980, state %>% c("South Carolina", "Georgia", "North Carolina"))
+
+ggplot(filter(gayguides), aes(x = state, fill = state)) +
+  geom_bar() +
+  labs(title = "Number of Locations in 1980 by State",
+       x = "state",
+       y = "Number of Locations") +
+  theme_classic()
 
 ```
 
 (@) Using the `gayguides` data, plot the number of religious institutions in each state.
 ```{r}
+library(DigitalMethodsData)
+data(gayguides)
+religious_counts <- gayguides %>%
+  group_by(state) %>%
+  summarize(count = n())
+
+ggplot(religious_counts, aes(x = reorder(state, -count), y = count)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Religious Institutions by State",
+       x = "State",
+       y = "Number of Religious Institutions") +
+  theme_classic()
 
 ```
 
-(@) Formulate a question based on a dataset of your choice. That question should be something that would be appropriately answered by a bar chart. What is the question you want to explore?
+(@) Formulate a question based on a dataset of your choice. That question should be something that would be appropriately answered by a bar chart.
+ What is the question you want to explore?
 
 <
 
