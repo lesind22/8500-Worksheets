@@ -55,13 +55,9 @@ What this does is create a new directory (sotu_files) and adds each State of the
 
 Now lets load all these texts into R using the `readtext()` function. First look up the documentation for this function and read about it. 
 ```{r}
-<<<<<<< HEAD
 library(readtext)
 texts <- readtext("sotu_files/*.txt")
 print(head(texts))
-=======
-sotu_texts <- readtext(file_paths)
->>>>>>> origin/main
 ```
 
 Take a look at sotu_texts now. Notice that we have two columns, one filled with the text, and one with a document id. 
@@ -108,28 +104,14 @@ The function `unnest_tokens()` also has an option called token. Tokenizing by wo
 
 (@)Use the documentation to tokenize the dataset into sentences: 
 ```{r}
-<<<<<<< HEAD
 library(tidyverse)
 library(tidytext)
 sotu_files <- tibble(
-  text = c("List of Presidential Addresses. These Presidential Addresses span from George Washington to the current position today.")
+  text = c("List of Presidential Addresses. These Presidential Addresses span from George Washington to today.")
 )
 sotu_files_sentences <- sotu_files %>%
   unnest_tokens(output = sentence, input = text, token = "sentences")
 print(sotu_files_sentences)
-=======
-library(tidytext)
-library(sotu)
-unnest_tokens(
-  tbl = sotu,
-  output = sentence,
-  input = text,
-  token = "sentences",
-  format = c("text"),
-  to_lower = TRUE,
-  drop = TRUE,
-)
->>>>>>> origin/main
 ```
 
 We've talked about n-grams loosely in class. But lets define it more formally. An n-gram is a contiguous sequence of n items from a given sample of text or speech. The n stands for the number of items. So for example, a bi-gram is sets of two words. 
@@ -150,7 +132,10 @@ head(sotu_bigrams$bigram)
 
 (@) Use `unest_tokens()` to create tri-grams. 
 ```{r}
-
+library(tidytext) 
+trigrams <- sotu_files %>%
+  unnest_tokens(trigram, text, token = "ngrams", n = 3)
+print(trigrams)
 ```
 
 ### Stopwords
@@ -216,7 +201,9 @@ tidy_sotu <- sotu_whole %>%
 ```
 (@) Before we move forward, take a minute a describe the chunk of code you just ran. What does each section do and how does it reflect the workflow for a topic modeling project? What are the important steps that are unique to topic modeling? 
 
->
+>The first step of code telling meta to create the sotu addresses into a data frame "sotu_meta". The second line of code is creating a file path for the sotu files to become tokenized. 
+Using the readtex() function to upload the txt files to a single data frame all at once. The entire sotu and the metadata becomes sorted using the arrange() function to put the Presidents in
+some form of order. The next line of code is combining the columns with the sotu_texts and as_tibble to combine everything into one data frame. The second half of code it the tidy dataset of sotu and the whole entire data frame. The unnest_tokens() function is separating only the word and text. The anti_join line of code is returning all the rows that are only present on one side, combined with the stop_words function removing all default stop words. 
 
 
 The most basic kind of analysis we might be interested in doing is counting words. We can do that easily using the `count()` function: 
@@ -251,15 +238,34 @@ sotu.length <- tidy_sotu %>%
   group_by(president) %>% 
   summarize(avg_words = mean(n)) %>% 
   arrange(desc(avg_words))
+print(sotu_length)
+
+longest_speech <- sotu.length %>% slice(1)
+shortest_speech <- sotu.length %>% slice(n())
+  print(sotu.length)
 ```
 
 (@) Think back to the metadata that we loaded about these speeches. Why are the STOU addresses for more modern president's shorter than others? (For example Bush vs Teddy Roosevelt)
 
->
+> Because overtime some words were used more than others, and simply some words were not being used anymore. Looking at the metadata of the speeches, it is also important to 
+take into account the era within History, there were moments to be a martyr for the cause and then in other instances speeches were given because it is tradition, and it was a task to fulfill. Roosevelt at the time was tackling The New Deal, as well this push for Americans to admire the landscape. Once the first Bush took office a lot had occurred and in order to avoid issues, keeping the speeches short and straight to the point was the best method to use. 
 
 (@) Filter the dataset to address this discrepancy and the recreate these statistics: 
 ```{r}
+library(tidytext)
+filter(sotu) <- tidy_sotu %>%
+  filter(year < 2000)
+sotu.length <- filter(sotu) %>%
+  count(president, doc_id) %>%
+  group_by(president) %>%
+  summarize(avg_words = mean(n)) %>%
+  arrange(desc(avg_words))
+print(sotu.length)
 
+longest.speech <- sotu.length %>%(1)
+shortest.speech <- sotu.length %>% slice(n())
+  print(longest.speech)
+  print(shortest.speech) 
 ```
 
 ### Term Frequency
@@ -289,7 +295,7 @@ tidy_sotu %>%
 ```
 (@) The code above is commented to help you follow it. Walk through the code above, and explain what each line does in your own words. If its a function you are unfamiliar with, look up the documentation.
 
-> 
+> For the "tidy_sotu" data frame we want to count each word from the addresses. We then want to aproud it by president. From there we want to mutate to find the sum of words. The next line of code wants the term frequency for the total amount of words in the document using the "n/n_tot" function. From there we use the "arrange()" function to sort the term frequencct in descending order. The "top_n(1)" function selects the row sepcified which in this case is 1. The last line of code is printing all default numbers, but in this case rows. 
 
 ### TF-IDF
 
@@ -328,8 +334,21 @@ sotu.tf.idf %>% arrange(desc(tf_idf))
 (@) Pick a president who served more than one term. Filter the dataset and generate both raw word counts and tf-idf scores for that president. What words are most significant in each method? Why and what does that tell you about that president and their administration?  
 
 ```{r}
+library(tidytext)
+filter(sotu) <- tidy_sotu %>%
+filter(president == "Harry S. Truman")
+
+raw.word.counts <- filter(sotu) %>%
+  count(doc_id, word, sort = TRUE)
+
+tf_idf_scores <- raw.word.counts %>%
+  bind_tf_idf(word, doc_id, n)
+
+print(raw.word.counts)
+print(sotu.tf.idf)
 
 ```
+I choose Truman who succeeded Roosevelt after his death. The words that have higher frequencies include "dollars", "congress", with "million" and "fiscal" leading behind in terms of frequency throughout the address. It tells me that Truman's administration were more concerned with the handling of money within Congress as well as how the budget would look in the future years. 
 
 ### Co-Occurance
 Co-occurrence gives us a sense of words that appear in the same text, but not necessarily next to each other. It shows words that are likely to co-occur. Note that this is different than topic modeling, which we'll discuss next week. 
@@ -363,8 +382,21 @@ sotu_word_pairs %>%
 ```
 (@) Create a network graph that shows the relationship between words that appear between 125 and 175 times.
 ```{r}
+library(igraph)
+library(ggraph)
+
+sotu_word_pairs %>% 
+  filter(n >= 125 & n <= 175) %>% 
+  graph_from_data_frame() %>% 
+  ggraph(layout = "fr") 
+  geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = "blue") +
+  geom_node_point(size = 5) +
+  geom_node_text(aes(label = name), repel = TRUE, 
+                 point.padding = unit(0.2, "lines")) +
+  theme_void()
 
 ```
+I'm not sure as to why it's resulting in an error, but I plan to come back to co-occurences once the semester has ended. I understand it, writing the code for it specifically is where the confusion comes in at. 
 
 ## Analyzing Historical Journals
 
@@ -385,12 +417,54 @@ mb <- readtext(paste(getwd(), "/txt/*.txt", sep=""))
 
 (@) Add code chunks below and intersperse text to explain what you are doing and why.
 
+```{r}
+library(readtext)
+library(dplyr)
+library(tidytext)
 
+mb <- readtext(paste(getwd(), "/txt/*.txt", sep=""))
+head(mb)
 
-
-
-
+metadata <- read.csv("https://raw.githubusercontent.com/regan008/8510-TextAnalysisData/main/mb-metadata.csv")
+head(metadata)
+combined_data <- mb %>%
+  left_join(metadata, by = c("doc_id") = "File")
+tidy_mb <- mb %>%
+  unnest_tokens(word, text)
+tf_idf_mb <- tidy_mb %>%
+  count(doc_id, word, sort = TRUE) %>%
+  bind_tf_idf(word, doc_id, n)
+athletic_tf_idf <- tf_idf %>%
+  filter(word == "athletic")
+```
+I'm not too sure why the code isn't working. I understand what I'm doing but creating the code is confusing myself and I think I'm combining the wrong functions. 
+```
 (@) Choose one of the datasets from this repository or use one of your own: https://github.com/regan008/8510-TextAnalysisData. Note that there are both zip files with .txt files as well as separate metadata files for each publication in this repo. 
 
 Write a text analysis script that explores and asks questions of the texts. At the end write a summary that analyzes the results you found. Be sure to rely on your historical knowledge. What can we learn from applying the strategies you've learned in this worksheet to analyze these documents?
 
+
+
+^ trying to delete this and unfortunately it isn't moving
+```{r}
+library(dplyr)
+library(tidytext)
+library(readtext)
+
+download.file("https://https://github.com/regan008/8510-TextAnalysisData/blob/main/TheAmericanCity.zip", "AmericanCity.zip")
+unzip("AmericanCity.zip", exdir = "AmericanCity")
+
+metadata <- read.csv(https://github.com/regan008/8510-TextAnalysisData/blob/main/AmCityMetadata.csv)
+  mb <- readtext(past(getwd(), "/AmericanCity/*.txt", sep=""))
+  mb <- mb %>%
+    left_join(metadata, by = c("doc_id" = "File"))
+  tidy_md <- mb %>%
+    unnest_tokens(word, text)
+  city_tfidf <- tf_idf_mb %>%
+    filter(word == "city")
+  earliest_year <- metadata %>%
+    mutate(Year = as.numeric(Year)) %>%
+    summarize(earliest_year = min(Year))
+  print(earliest_year)
+
+  I wanted to find out what was the earliest year that a bulletin was pusblished for The American City datset. After looking through some of the text files and suing the knowlegde from my other class focused on The American City, the year 1895 was compelling in a few ways. It was a testament to the rapid induistrialization occurring as well as the rapid rise of transporation sprouting all across the US. Noticing that the earliest article was published in 1895, it also implies that this was the year a lot of bulletins took form informing Americans on certain innovations. We can learn from aplying the strategies throughout the worksheet to analyze these documents in a few ways. They can imform us on the amount of a word is being used, it can also tell us the commonalities among documents that impossible to read with the naked eye. We can also influence or strengthen a historical question of some sort, or inspire one. 
