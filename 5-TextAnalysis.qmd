@@ -55,9 +55,13 @@ What this does is create a new directory (sotu_files) and adds each State of the
 
 Now lets load all these texts into R using the `readtext()` function. First look up the documentation for this function and read about it. 
 ```{r}
+<<<<<<< HEAD
 library(readtext)
 texts <- readtext("sotu_files/*.txt")
 print(head(texts))
+=======
+sotu_texts <- readtext(file_paths)
+>>>>>>> origin/main
 ```
 
 Take a look at sotu_texts now. Notice that we have two columns, one filled with the text, and one with a document id. 
@@ -104,6 +108,7 @@ The function `unnest_tokens()` also has an option called token. Tokenizing by wo
 
 (@)Use the documentation to tokenize the dataset into sentences: 
 ```{r}
+<<<<<<< HEAD
 library(tidyverse)
 library(tidytext)
 sotu_files <- tibble(
@@ -112,6 +117,19 @@ sotu_files <- tibble(
 sotu_files_sentences <- sotu_files %>%
   unnest_tokens(output = sentence, input = text, token = "sentences")
 print(sotu_files_sentences)
+=======
+library(tidytext)
+library(sotu)
+unnest_tokens(
+  tbl = sotu,
+  output = sentence,
+  input = text,
+  token = "sentences",
+  format = c("text"),
+  to_lower = TRUE,
+  drop = TRUE,
+)
+>>>>>>> origin/main
 ```
 
 We've talked about n-grams loosely in class. But lets define it more formally. An n-gram is a contiguous sequence of n items from a given sample of text or speech. The n stands for the number of items. So for example, a bi-gram is sets of two words. 
