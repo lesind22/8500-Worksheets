@@ -216,7 +216,39 @@ It changes the model to have only the top words for the periodical accounting fo
 
 (@) Can you create a topic model for just the documents in the 1920s? How does that change the model? 
 ```{r}
+library(topicmodels)
+library(tidytext)
+library(tidyverse)
+library(ggplot2)
+library(tm)
+library(readtext)
 
+download.file("https://github.com/regan008/8510-TextAnalysisData/blob/main/MindAndBody.zip?raw=true", "MB.zip")
+
+mb_metadata <- read.csv("https://raw.githubusercontent.com/regan008/8510-TextAnalysisData/main/mb-metadata.csv")
+
+metadata_1920s <- mb_metadata[mb_metadata$Year >= 1920 & mb_metadata$Year < 1930, ]
+files <- list.files("MindAndBody", full.names = TRUE)
+documents <- sapply(files, readLines)
+documents_1920s <- documents[match(metadata_1920s$Document_Name, basename(files))]
+custom_stopwords <- c(stopwords("en"),"will", "health", "family", "one", "fat" )
+num_topics <- 25  
+lda_model_1920s <- LDA(dtm_1920s, k = num_topics, control = list(seed = 1234))
+topics_1920s <- terms(lda_model_1920s, 10)
+print(topics_1920s)
+
+lda_tidy_1920s <- tidy(lda_model_1920s)
+top_terms_1920s <- lda_tidy_1920s %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 10) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+
+ggplot(top_terms_1920s, aes(beta, reorder_within(term, beta, topic), fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  coord_flip() +
+  labs(x = "Beta", y = "Term", title = "Top Terms for Each Topic (1920s)")
 
 ```
 
@@ -227,9 +259,43 @@ Fit a topic model that explores and asks questions of the texts. At the end writ
 Be sure to rely on your historical knowledge. What can we learn from applying the strategies you've learned in this worksheet to analyze these documents? 
 How might topic models be useful to explore a large corpus of texts?
 
+library(tidytext)
+library(tidyverse)
+library(tm)
+library(readtext)
+library(topicmodels)
+download.file("https://github.com/regan008/8510-TextAnalysisData/blob/main/TheAmericanCity.zip?raw=true", "AmCity.zip")
+unzip("AmCity.zip")
+
+ac_metadata <- read.csv("https://raw.githubusercontent.com/regan008/8510-TextAnalysisData/main/AmCityMetadata.csv")
+
+issue_1916_december <- amc_metadata[ac_metadata$Year == 1916 & ac_metadata$Month == "December", ]
+files_1916_december <- issue_1916_december$Document_Name
+files <- list.files("TheAmericanCity", full.names = TRUE)
+documents_1916_december <- sapply(files[basename(files) %in% files_1916_december], readLines)  
+
+processed_docs_1916_december <- sapply(documents_1916_december, preprocess_text)
+
+corpus_1916_december <- Corpus(VectorSource(processed_docs_1916_december))
+dtm_1916_december <- DocumentTermMatrix(corpus_1916_december)
+
+word_freq <- colSums(as.matrix(dtm_1916_december))
+word_freq_sorted <- sort(word_freq, decreasing = TRUE)
+num_topics <- 5 
+lda_model_1916_december <- LDA(dtm_1916_december, k = num_topics, control = list(seed = 1234))
+
+topics_1916_december <- terms(lda_model_1916_december, 10)
+gplot(topic_1916_december, aes(beta, reorder_within(term, beta, topic), fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  coord_flip() +
+  labs(x = "Beta", y = "Term", title = "Top Word for 1916 December Issue")
+
+
 Add code blocks below as necessary.
 
 (@) Finally, when you are all done. Write up your findings. What research question did you focus on and what did you learn? 
+The dataset that I used is the American City one, to correlate with the other class I am taking. The research question that I created is "What was the most used word in the 1916 Decemeber issue of "The American City"? Takaing into context what I have learned in the class, during this period industrialization, also at this time the impact of urban transportation transformed how individuals live, as well what what turned them into consumers. Also a lot of areas mentioned in the issue are areas where spatial specialization took place and it also contributed to the rise of urban transportation. Using topic models for a large corpus of text can narrow down topics that one may have not possibly seen. Topic modeling also offers a lens into evaluating a corpus that is possibly too long to read using close-reading. 
 
 
 
