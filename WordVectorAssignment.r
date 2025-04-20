@@ -166,7 +166,8 @@ subset %>%
 
 
 
-# The overall word vector script analyzes about 45 The Crisis Magazine .txt files downloaded into a folder and then imported into VSCode to run the code. 
+# The overall word vector script analyzes about 45 The Crisis Magazine .txt files downloaded into a folder and then imported into VSCode to run the code. The questions 
+# to ask is how did education apply to women and men during this historical period. 
 # From the first-word similarity model, I can infer that the word "christian" (no capitalization in output, not the computer's responsibility to recognize whether or not it is supposed to be) became more associated with the word "young". 
 # I did not find this shocking because, in the early 1920s, there was an initiative to drive younger people to Christianity, which checks out when evaluating the output. 
 # Also during this era, AME (African Methodist Episcopal) churches and other denominations appealed to the younger crowds as stated, and it is critical to note that these marketing strategies geared towards advertisements of 
