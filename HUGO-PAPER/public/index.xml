@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Indira Lessington</title>
+    <link>https://example.org/</link>
+    <description>Recent content on Indira Lessington</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://example.org/dir1/a/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.org/dir1/a/</guid>
+      <description>&lt;p&gt;Welcome to my personal academic portfolio! I am a PhD student at Clemson University, studying Digital History. My interests are 19-20th century African American History with a concentration of film, media, and photography.&lt;/p&gt;&#xA;&lt;p&gt;Since a child I&amp;rsquo;ve always bee fascinated with African American culture, leading into my digital dissertation project that focuses on JET and Ebony magazines and it&amp;rsquo;s affect on African American beauty. Aspiring to be a digital cultural historian, I believe in order to move to the next level technology/software must be accessible and digestable for the next generation.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
