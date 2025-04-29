@@ -376,10 +376,49 @@ I think the data will show that American parks are older, larger and further fro
 See #5 above.
  
 
- 
-
+Below is the Leaflet for Britain vs Continental Europe (leaflet works).
 ```{r}
+library(leaflet)
+library(dplyr)
 parks <- read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/parks-geocoded.csv")
-
+parks <- parks %>%
+  mutate(region = ifelse(grepl("Britain", closest_city, ignore.case = TRUE), "Britain", "Continental Europe"))
+parks <- parks %>%
+  rename(
+    longitude = lon,  
+    latitude = lat   
+  )
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = parks,
+    ~longitude, ~latitude,
+    color = "blue",
+    popup = ~paste("<strong>Park Name:</strong>", park)  
+  )
 ```
 
+
+
+```{r}
+library(leaflet)
+library(dplyr)
+parks <- read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/parks-geocoded.csv")
+parks <- parks %>%
+  mutate(region = ifelse(grepl("Britain", closest_city, ignore.case = TRUE), "Britain", "US"))
+parks <- parks %>%
+  rename(
+    longitude = lon,  
+    latitude = lat   
+  )
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = parks,
+    ~longitude, ~latitude,
+    color = "blue",
+    popup = ~paste("<strong>Park Name:</strong>", park)  
+  )
+
+```
+Above is the leaflet code for the comparison of Britain vs the US
